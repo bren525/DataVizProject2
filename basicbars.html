@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Social Media Data Charts</title>
-<script type="text/javascript" src="D3/d3.js">
+<script type="text/javascript" src="/home/li/Documents/DataViz/D3/d3.js">
 
 </script>
 </head>
@@ -15,7 +15,8 @@
 var svg = d3.select("#viz")
 var height = svg.attr("height");
 var width = svg.attr("width");
-var dataset = [ 5, 10, 15, 20, 25 ];
+var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
 
 d3.select("body").selectAll("p")
 .data(dataset)
@@ -29,9 +30,10 @@ svg.selectAll("rect")
 .enter()
 .append("rect")
 .attr("x", function(d, i) {return i * 21; })
-.attr("y", function(d){return d})
+.attr("y", 10)
 .attr("width", 20)
-.attr("height", 100);
+.attr("height", function(d){return (d * 10)})
+.style("fill", "blue");
 
 </script>
 </body>
