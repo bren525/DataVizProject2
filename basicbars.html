@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Social Media Data Charts</title>
+<script type="text/javascript" src="D3/d3.js">
+
+</script>
+</head>
+<body>
+	<svg id="viz" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+
+<script type="text/javascript">
+var svg = d3.select("#viz")
+var height = svg.attr("height");
+var width = svg.attr("width");
+var dataset = [ 5, 10, 15, 20, 25 ];
+
+d3.select("body").selectAll("p")
+.data(dataset)
+.enter()
+.append("p")
+.text(function(d){return d})
+.style("color", "red");
+
+svg.selectAll("rect")
+.data(dataset)
+.enter()
+.append("rect")
+.attr("x", function(d, i) {return i * 21; })
+.attr("y", function(d){return d})
+.attr("width", 20)
+.attr("height", 100);
+
+</script>
+</body>
+</html>
