@@ -128,7 +128,58 @@
             "suburban": 21,
             "rural": 15
         }
-      }
+    }
+    var sites = ["facebook","pinterest","instagram","linkedin","twitter"];
+    var demos = {
+        "gender": ["male","female"],
+        "race": ["white","black","hispanic"],
+        "age": ["young","middle","old","senior"],
+        "school": ["highschool","some","college"],
+        "money": ["poor","fine","average","rich"],
+        "loc": ["urban","suburban","rural"]
+    }
+    formatted = {}
+    Object.keys(data["facebook"]).forEach(function(demo){
+        formatted[demo] = [];
+    });
+    Object.keys(data).forEach(function(site){
+        Object.keys(data[site]).forEach(function(demo){
+            formatted[demo].push(data[site][demo])
+        });
+    });
+    console.log(formatted);
+    height = 500
+    width = 800
+    
+    function donut(site, demo){
+        var dataset = [];
+        demos[demo].forEach(function(d, i){
+            dataset.push(data[site][d]);
+        });
+        var svg = d3.select("#viz")
+        .append('g')
+        .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+
+        var color = d3.scale.category20b();
+        outr = 200
+        var arc = d3.svg.arc()
+        .innerRadius(outr - (outr * data[site]["total"]/100))
+        .outerRadius(outr);
+
+        var pie = d3.layout.pie()
+        .value(function(d) { return d; })
+        .sort(null);
+
+        var path = svg.selectAll('path')
+            .data(pie(dataset))
+            .enter()
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', function(d, i) { 
+                return color(i*4);
+            });
+    }
+    donut("linkedin","race")    
     </script>
   </body>
 </html>
