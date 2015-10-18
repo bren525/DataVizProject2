@@ -8,40 +8,219 @@
 </script>
 </head>
 <body>
-    <svg id="viz" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Gender" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+    <svg id="Race" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+    <svg id="Age" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+    <svg id="Education" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+    <svg id="Income" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+    <svg id="Place" height="500" width="800" style="border: 1px solid grey;">
     </svg>
 
 <script type="text/javascript">
-var facebook= {
-  "women": "hello"
-};
-var svg = d3.select("#viz")
-var height = svg.attr("height");
-var width = svg.attr("width");
+
+var Gsvg = d3.select("#Gender")
+var height = Gsvg.attr("height");
+var width = Gsvg.attr("width");
+
+var Rsvg = d3.select("#Race");
+var height = Rsvg.attr("height");
+var width = Rsvg.attr("width");
+
+var Asvg = d3.select("#Age");
+var height = Asvg.attr("height");
+var width = Asvg.attr("width");
+
+var Esvg = d3.select("#Education");
+var height = Esvg.attr("height");
+var width = Esvg.attr("width");
+
+var Isvg = d3.select("#Income");
+var height = Isvg.attr("height");
+var width = Isvg.attr("width");
+
+var Psvg = d3.select("#Place");
+var height = Psvg.attr("height");
+var width = Psvg.attr("width");
+
 var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
 11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+      
+var data = {
+  "total": [
+    72,
+    31,
+    72,
+    25,
+    23
+  ],
+  "male": [
+    66,
+    16,
+    66,
+    26,
+    25
+  ],
+  "female": [
+    77,
+    44,
+    77,
+    25,
+    21
+  ],
+  "white": [
+    70,
+    32,
+    70,
+    26,
+    20
+  ],
+  "black": [
+    67,
+    23,
+    67,
+    22,
+    28
+  ],
+  "hispanic": [
+    75,
+    32,
+    75,
+    22,
+    28
+  ],
+  "young": [
+    82,
+    82,
+    82,
+    22,
+    32
+  ],
+  "middle": [
+    79,
+    79,
+    79,
+    32,
+    29
+  ],
+  "old": [
+    64,
+    64,
+    64,
+    36,
+    13
+  ],
+  "senior": [
+    48,
+    48,
+    48,
+    12,
+    6
+  ],
+  "highschool": [
+    71,
+    71,
+    71,
+    9,
+    19
+  ],
+  "some": [
+    72,
+    72,
+    72,
+    25,
+    23
+  ],
+  "college": [
+    72,
+    72,
+    72,
+    46,
+    27
+  ],
+  "poor": [
+    73,
+    73,
+    73,
+    17,
+    21
+  ],
+  "fine": [
+    72,
+    72,
+    72,
+    21,
+    19
+  ],
+  "average": [
+    66,
+    66,
+    66,
+    32,
+    25
+  ],
+  "rich": [
+    78,
+    78,
+    78,
+    41,
+    26
+  ],
+  "urban": [
+    74,
+    74,
+    74,
+    30,
+    30
+  ],
+  "suburban": [
+    72,
+    72,
+    72,
+    26,
+    21
+  ],
+  "rural": [
+    67,
+    67,
+    67,
+    12,
+    15
+  ]
+}
 
- var jsonCircles = [
-  { "x_axis": 30, "y_axis": 30, "radius": "20", "color" : "green"},
-  { "x_axis": 70, "y_axis": 70, "radius": 20, "color" : "purple"},
-  { "x_axis": 110, "y_axis": 100, "radius": 20, "color" : "red"}];
 
-/*d3.select("body").selectAll("p")
-.data(jsonCircles[0].radius)
-.enter()
-.append("p")
-.text(function(d){return d})
-.style("color", "red");*/
+function bars(){
+    barPadding = 1;
+    var sites = ["facebook","pinterest","instagram","linkedin","twitter"];
+    var demos = {
+    "gender": ["male","female"],
+    "race": ["white","black","hispanic"],
+    "age": ["young","middle","old","senior"],
+    "school": ["highschool","some","college"],
+    "money": ["poor","fine","average","rich"],
+    "loc": ["urban","suburban","rural"]
+    }
+    svgs = ["Gsvg", "Rsvg", "Asvg", "Esvg", "Isvg", "Psvg"];
+    for (i=0; i<(svgs.length); i++){
+    var currentsvg = d3.select(svgs[i])
+    currentsvg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", 20)
+    .attr("y", 40)
+    .attr("width", width / data.length - barPadding)
+    .attr("height", function(d){return d[demos[i]]})
+    .style("fill", "blue");
+    }
+}
 
-svg.selectAll("rect")
-.data(jsonCircles[0].x_axis)
-.enter()
-.append("rect")
-.attr("x", jsonCircles[0].x_axis )
-.attr("y", 10)
-.attr("width", 25)
-.attr("height", 15)
-.style("fill", "blue");
+bars()
 
 </script>
 </body>
