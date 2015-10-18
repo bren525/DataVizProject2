@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Social Media Data Charts</title>
+<script type="text/javascript" src="/home/li/Documents/DataViz/D3/d3.js">
+
+</script>
+</head>
+<body>
+    <svg id="viz" height="500" width="800" style="border: 1px solid grey;">
+    </svg>
+
+<script type="text/javascript">
+var facebook= {
+  "women": "hello"
+};
+var svg = d3.select("#viz")
+var height = svg.attr("height");
+var width = svg.attr("width");
+var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+
+ var jsonCircles = [
+  { "x_axis": 30, "y_axis": 30, "radius": "20", "color" : "green"},
+  { "x_axis": 70, "y_axis": 70, "radius": 20, "color" : "purple"},
+  { "x_axis": 110, "y_axis": 100, "radius": 20, "color" : "red"}];
+
+/*d3.select("body").selectAll("p")
+.data(jsonCircles[0].radius)
+.enter()
+.append("p")
+.text(function(d){return d})
+.style("color", "red");*/
+
+svg.selectAll("rect")
+.data(jsonCircles[0].x_axis)
+.enter()
+.append("rect")
+.attr("x", jsonCircles[0].x_axis )
+.attr("y", 10)
+.attr("width", 25)
+.attr("height", 15)
+.style("fill", "blue");
+
+</script>
+</body>
+</html>
