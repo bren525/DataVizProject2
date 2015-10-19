@@ -8,17 +8,18 @@
 </script>
 </head>
 <body>
-    <svg id="Gender" height="500" width="800" style="border: 1px solid grey;">
+  <h1> Demographics across Social Media Sites</h1>
+    <svg id="Gender" height="300" width="500" style="border: 1px solid grey;">
     </svg>
-    <svg id="Race" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Race" height="300" width="500" style="border: 1px solid grey;">
     </svg>
-    <svg id="Age" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Age" height="300" width="500" style="border: 1px solid grey;">
     </svg>
-    <svg id="Education" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Education" height="300" width="500" style="border: 1px solid grey;">
     </svg>
-    <svg id="Income" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Income" height="300" width="500" style="border: 1px solid grey;">
     </svg>
-    <svg id="Place" height="500" width="800" style="border: 1px solid grey;">
+    <svg id="Place" height="300" width="500" style="border: 1px solid grey;">
     </svg>
 
 <script type="text/javascript">
@@ -47,154 +48,55 @@ var Psvg = d3.select("#Place");
 var height = Psvg.attr("height");
 var width = Psvg.attr("width");
 
-var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
-      
-var data = {
-  "total": [
-    72,
-    31,
-    72,
-    25,
-    23
-  ],
-  "male": [
-    66,
-    16,
-    66,
-    26,
-    25
-  ],
-  "female": [
-    77,
-    44,
-    77,
-    25,
-    21
-  ],
-  "white": [
-    70,
-    32,
-    70,
-    26,
-    20
-  ],
-  "black": [
-    67,
-    23,
-    67,
-    22,
-    28
-  ],
-  "hispanic": [
-    75,
-    32,
-    75,
-    22,
-    28
-  ],
-  "young": [
-    82,
-    82,
-    82,
-    22,
-    32
-  ],
-  "middle": [
-    79,
-    79,
-    79,
-    32,
-    29
-  ],
-  "old": [
-    64,
-    64,
-    64,
-    36,
-    13
-  ],
-  "senior": [
-    48,
-    48,
-    48,
-    12,
-    6
-  ],
-  "highschool": [
-    71,
-    71,
-    71,
-    9,
-    19
-  ],
-  "some": [
-    72,
-    72,
-    72,
-    25,
-    23
-  ],
-  "college": [
-    72,
-    72,
-    72,
-    46,
-    27
-  ],
-  "poor": [
-    73,
-    73,
-    73,
-    17,
-    21
-  ],
-  "fine": [
-    72,
-    72,
-    72,
-    21,
-    19
-  ],
-  "average": [
-    66,
-    66,
-    66,
-    32,
-    25
-  ],
-  "rich": [
-    78,
-    78,
-    78,
-    41,
-    26
-  ],
-  "urban": [
-    74,
-    74,
-    74,
-    30,
-    30
-  ],
-  "suburban": [
-    72,
-    72,
-    72,
-    26,
-    21
-  ],
-  "rural": [
-    67,
-    67,
-    67,
-    12,
-    15
-  ]
+var dataset = [
+  {"total": 30, "male": 30, "female": 20, "white" : 32 , "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior":4,"highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
+
+  { "total": 70, "male": 70, "female": 20, "white" : 21, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
+
+  { "total": 110, "male": 100, "female": 20, "white" : 66, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
+
+  { "total": 70, "male": 70, "female": 20, "white" : 64, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
+
+  { "total": 70, "male": 70, "female": 20, "white" : 71, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
+
+  { "total": 70, "male": 70, "female": 20, "white" : 13, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78}];
+
+function GenderBars(){
+  var stack = d3.layout.stack();
+    stack(dataset);
+
+  var rects = groups.selectAll("rect")
+    .data(function(d) { return d; })
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return xScale(i);})
+    .attr("y", function(d) {return yScale(d.y0);})
+    .attr("height", function(d) {return yScale(d.y);})
+    .attr("width", xScale.rangeBand());
+
+    barPadding = 10;
+    Gsvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", 40)
+    .attr("width", 20)
+    .attr("height", function(d){return d.male})
+    .style("fill", "blue");
+
+    Gsvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", 40)
+    .attr("width", 20)
+    .attr("height", function(d){return d.female})
+    .style("fill", "red");
 }
-
-
-function bars(){
+GenderBars()
+/*function bars(){
     barPadding = 1;
     var sites = ["facebook","pinterest","instagram","linkedin","twitter"];
     var demos = {
@@ -204,8 +106,8 @@ function bars(){
     "school": ["highschool","some","college"],
     "money": ["poor","fine","average","rich"],
     "loc": ["urban","suburban","rural"]
-    }
-    svgs = ["Gsvg", "Rsvg", "Asvg", "Esvg", "Isvg", "Psvg"];
+    }*/
+/*    svgs = ["Gsvg", "Rsvg", "Asvg", "Esvg", "Isvg", "Psvg"];
     for (i=0; i<(svgs.length); i++){
     var currentsvg = d3.select(svgs[i])
     currentsvg.selectAll("rect")
@@ -216,11 +118,9 @@ function bars(){
     .attr("y", 40)
     .attr("width", width / data.length - barPadding)
     .attr("height", function(d){return d[demos[i]]})
-    .style("fill", "blue");
+    .style("fill", "blue");*/
     }
 }
-
-bars()
 
 </script>
 </body>
