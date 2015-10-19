@@ -9,18 +9,24 @@
 </head>
 <body>
   <h1> Demographics across Social Media Sites</h1>
-    <svg id="Gender" height="300" width="500" style="border: 1px solid grey;">
+    <svg id="Gender" height="300" width="400" style="border: 1px solid grey;">
     </svg>
-    <svg id="Race" height="300" width="500" style="border: 1px solid grey;">
+    <h2>Gender</h2>
+    <svg id="Race" height="300" width="400" style="border: 1px solid grey;">
     </svg>
-    <svg id="Age" height="300" width="500" style="border: 1px solid grey;">
+    <h2>Race</h2>
+    <svg id="Age" height="300" width="400" style="border: 1px solid grey;">
     </svg>
-    <svg id="Education" height="300" width="500" style="border: 1px solid grey;">
+    <h2>Age</h2>
+    <svg id="Education" height="300" width="400" style="border: 1px solid grey;">
     </svg>
-    <svg id="Income" height="300" width="500" style="border: 1px solid grey;">
+    <h2>Education</h2>
+    <svg id="Income" height="300" width="400" style="border: 1px solid grey;">
     </svg>
-    <svg id="Place" height="300" width="500" style="border: 1px solid grey;">
+    <h2>Income</h2>
+    <svg id="Place" height="300" width="400" style="border: 1px solid grey;">
     </svg>
+    <h2>Location</h2>
 
 <script type="text/javascript">
 
@@ -48,21 +54,24 @@ var Psvg = d3.select("#Place");
 var height = Psvg.attr("height");
 var width = Psvg.attr("width");
 
-var dataset = [
-  {"total": 30, "male": 30, "female": 20, "white" : 32 , "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior":4,"highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
-
-  { "total": 70, "male": 70, "female": 20, "white" : 21, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
-
-  { "total": 110, "male": 100, "female": 20, "white" : 66, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
-
-  { "total": 70, "male": 70, "female": 20, "white" : 64, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
-
-  { "total": 70, "male": 70, "female": 20, "white" : 71, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78},
-
-  { "total": 70, "male": 70, "female": 20, "white" : 13, "black": 45, "hispanic": 44, "young": 33, "middle": 43, "old": 45, "senior": 45, "highschool": 33, "some": 21, "college": 32, "poor": 21, "fine": 34, "average": 44, "rich": 78}];
+var dataset = [{"total": 72, "male": 66,"female": 77,"white": 70,"black": 67,"hispanic": 75,"young": 82,"middle": 79,"old": 64,
+            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73,"fine": 72,"average": 66, "rich": 78,"urban": 74,
+            "suburban": 72,"rural": 67},
+            {"total": 31,"male": 16, "female": 44,"white": 32,"black": 23,"hispanic": 32,"young": 82,"middle": 79,"old": 64,
+            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73, "fine": 72, "average": 66,"rich": 78,"urban": 74,
+            "suburban": 72,"rural": 67},
+            {"total": 72,"male": 66,"female": 77,"white": 70,"black": 67,"hispanic": 75,"young": 82,"middle": 79, "old": 64,
+            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73,"fine": 72,"average": 66, "rich": 78,"urban": 74,
+            "suburban": 72, "rural": 67},
+            {"total": 25,"male": 26,"female": 25, "white": 26,"black": 22,"hispanic": 22, "young": 22,"middle": 32, "old": 36,
+            "senior": 12,"highschool": 9,"some": 25, "college": 46,"poor": 17,"fine": 21,"average": 32,"rich": 41,"urban": 30,
+            "suburban": 26,"rural": 12},
+            {"total": 23,"male": 25,"female": 21,"white": 20,"black": 28,"hispanic": 28, "young": 32,"middle": 29,"old": 13,
+            "senior": 6,"highschool": 19,"some": 23,"college": 27,"poor": 21,"fine": 19,"average": 25,"rich": 26,"urban": 30,
+            "suburban": 21,"rural": 15}]
 
 function GenderBars(){
-  var stack = d3.layout.stack();
+/*  var stack = d3.layout.stack();
     stack(dataset);
 
   var rects = groups.selectAll("rect")
@@ -73,14 +82,14 @@ function GenderBars(){
     .attr("y", function(d) {return yScale(d.y0);})
     .attr("height", function(d) {return yScale(d.y);})
     .attr("width", xScale.rangeBand());
-
+*/
     barPadding = 10;
     Gsvg.selectAll("rect")
     .data(dataset)
     .enter()
     .append("rect")
     .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
-    .attr("y", 40)
+    .attr("y", function(d){return height - d.male})
     .attr("width", 20)
     .attr("height", function(d){return d.male})
     .style("fill", "blue");
@@ -90,12 +99,202 @@ function GenderBars(){
     .enter()
     .append("rect")
     .attr("x", 2)
-    .attr("y", 40)
+    .attr("y", function(d){return height - d.female})
     .attr("width", 20)
     .attr("height", function(d){return d.female})
     .style("fill", "red");
 }
+
 GenderBars()
+
+function Race(){
+    barPadding = 10;
+    Rsvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", function(d){return height - d.white})
+    .attr("width", 20)
+    .attr("height", function(d){return d.white})
+    .style("fill", "blue");
+
+    Rsvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.black})
+    .attr("width", 20)
+    .attr("height", function(d){return d.black})
+    .style("fill", "red");
+
+    Rsvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.hispanic})
+    .attr("width", 20)
+    .attr("height", function(d){return d.hispanic})
+    .style("fill", "yellow");
+}
+Race()
+
+function Age(){
+    barPadding = 10;
+    Asvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", function(d){return height - d.young})
+    .attr("width", 20)
+    .attr("height", function(d){return d.young})
+    .style("fill", "blue");
+
+    Asvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.middle})
+    .attr("width", 20)
+    .attr("height", function(d){return d.middle})
+    .style("fill", "red");
+
+    Asvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.old})
+    .attr("width", 20)
+    .attr("height", function(d){return d.old})
+    .style("fill", "yellow");
+
+    Asvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.senior})
+    .attr("width", 20)
+    .attr("height", function(d){return d.senior})
+    .style("fill", "orange");
+}
+Age()
+
+function Education(){
+    barPadding = 10;
+    Esvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", function(d){return height - d.highschool})
+    .attr("width", 20)
+    .attr("height", function(d){return d.highschool})
+    .style("fill", "blue");
+
+    Esvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.some})
+    .attr("width", 20)
+    .attr("height", function(d){return d.some})
+    .style("fill", "red");
+
+    Esvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.college})
+    .attr("width", 20)
+    .attr("height", function(d){return d.college})
+    .style("fill", "yellow");
+}
+Education()
+
+function Income(){
+    barPadding = 10;
+    Isvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", function(d){return height - d.poor})
+    .attr("width", 20)
+    .attr("height", function(d){return d.poor})
+    .style("fill", "blue");
+
+    Isvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.fine})
+    .attr("width", 20)
+    .attr("height", function(d){return d.fine})
+    .style("fill", "red");
+
+    Isvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.average})
+    .attr("width", 20)
+    .attr("height", function(d){return d.average})
+    .style("fill", "yellow");
+
+    Isvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.rich})
+    .attr("width", 20)
+    .attr("height", function(d){return d.rich})
+    .style("fill", "orange");
+}
+Income()
+function Place(){
+    barPadding = 10;
+    Psvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width / dataset.length) + barPadding;})
+    .attr("y", function(d){return height - d.urban})
+    .attr("width", 20)
+    .attr("height", function(d){return d.urban})
+    .style("fill", "blue");
+
+    Psvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.suburban})
+    .attr("width", 20)
+    .attr("height", function(d){return d.suburban})
+    .style("fill", "red");
+
+    Psvg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", 2)
+    .attr("y", function(d){return height - d.rural})
+    .attr("width", 20)
+    .attr("height", function(d){return d.rural})
+    .style("fill", "yellow");
+}
+Place()
 /*function bars(){
     barPadding = 1;
     var sites = ["facebook","pinterest","instagram","linkedin","twitter"];
@@ -106,8 +305,8 @@ GenderBars()
     "school": ["highschool","some","college"],
     "money": ["poor","fine","average","rich"],
     "loc": ["urban","suburban","rural"]
-    }*/
-/*    svgs = ["Gsvg", "Rsvg", "Asvg", "Esvg", "Isvg", "Psvg"];
+    }
+    svgs = ["Gsvg", "Rsvg", "Asvg", "Esvg", "Isvg", "Psvg"];
     for (i=0; i<(svgs.length); i++){
     var currentsvg = d3.select(svgs[i])
     currentsvg.selectAll("rect")
@@ -118,9 +317,9 @@ GenderBars()
     .attr("y", 40)
     .attr("width", width / data.length - barPadding)
     .attr("height", function(d){return d[demos[i]]})
-    .style("fill", "blue");*/
+    .style("fill", "blue");
     }
-}
+}*/
 
 </script>
 </body>
