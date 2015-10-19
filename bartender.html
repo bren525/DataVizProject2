@@ -9,28 +9,28 @@
 </head>
 <body>
   <h1> Demographics across Social Media Sites</h1>
-    <svg id="Gender" height="200" width="400" style="border: 1px solid grey;">
-    </svg>
     <h2>Gender</h2>
-    <svg id="Race" height="200" width="400" style="border: 1px solid grey;">
+    <svg id="Gender" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Race</h2>
-    <svg id="Age" height="200" width="400" style="border: 1px solid grey;">
+    <svg id="Race" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Age</h2>
-    <svg id="Education" height="200" width="400" style="border: 1px solid grey;">
+    <svg id="Age" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Education</h2>
-    <svg id="Income" height="200" width="400" style="border: 1px solid grey;">
+    <svg id="Education" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Income</h2>
-    <svg id="Place" height="200" width="400" style="border: 1px solid grey;">
+    <svg id="Income" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Location</h2>
+    <svg id="Place" height="250" width="400" style="border: 1px solid grey;">
+    </svg>
 
 <script type="text/javascript">
 
-var Gsvg = d3.select("#Gender")
+var Gsvg = d3.select("#Gender");
 var gheight = Gsvg.attr("height");
 var gwidth = Gsvg.attr("width");
 var gGroup = Gsvg.append("g");
@@ -85,16 +85,16 @@ function GenderBars(){
 
     g.append("rect") //Makes the columns for male percentages of all sites
     .attr("x", function(d, i) {return i * (gwidth / dataset.length) + barPadding/2;})
-    .attr("y", function(d){return gheight - 2*d.male})
+    .attr("y", function(d){return gheight - 2*d.male - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.male})
     .style("fill", "blue");
 
     g.append("rect") //makes the columns for female percentages of all sites 
     .attr("x", function(d, i) {return i * (gwidth / dataset.length) +barPadding/2 + 20;})
-    .attr("y", function(d){return gheight - 2*d.female})
+    .attr("y", function(d){return gheight - 2*d.female-50})
     .attr("width", 20)
-    .attr("height", function(d){return 2*d.female})
+    .attr("height", function(d){return 2*d.female })
     .style("fill", "red");
 
     var g = gGroup.selectAll("text") 
@@ -104,13 +104,55 @@ function GenderBars(){
 
     g.append("text") //labels the male percentages
     .attr("x",function(d, i) {return i * (gwidth / dataset.length) + barPadding/2 ;} )
-    .attr("y", function(d){return gheight - 2*d.male})
+    .attr("y", function(d){return gheight - 2*d.male - 50})
     .text(function(d){return d.male});
 
     g.append("text") //labels the female percentages
     .attr("x",function(d, i) {return i * (gwidth / dataset.length) +barPadding/2 + 20;} )
-    .attr("y", function(d){return gheight - 2*d.female})
+    .attr("y", function(d){return gheight - 2*d.female - 50})
     .text(function(d){return d.female});
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 35)
+    .text("Female")
+    .attr("fill", "red");
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 20)
+    .text("Male")
+    .attr("fill", "blue");    
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
+    .attr("font-size", "12px");
 }
 GenderBars()
 
@@ -124,24 +166,24 @@ function Race(){
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (rwidth / dataset.length) + barPadding/2;})
-    .attr("y", function(d){return rheight - 2*d.white})
+    .attr("y", function(d){return rheight - 2*d.white - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.white})
     .style("fill", "blue");
 
     g.append("rect")
     .attr("x",function(d, i) {return i * (rwidth / dataset.length) + barPadding/2+20;})
-    .attr("y", function(d){return rheight - 2*d.black})
+    .attr("y", function(d){return rheight - 2*d.black - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.black})
     .style("fill", "red");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (rwidth / dataset.length) + barPadding/2 + 40;})
-    .attr("y", function(d){return rheight - 2*d.hispanic})
+    .attr("y", function(d){return rheight - 2*d.hispanic - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.hispanic})
-    .style("fill", "yellow");
+    .style("fill", "orange");
 
     var g = rGroup.selectAll("text") 
     .data(dataset)
@@ -150,18 +192,66 @@ function Race(){
 
     g.append("text") //labels the white percentages
     .attr("x",function(d, i) {return i * (rwidth / dataset.length) + barPadding/2;} )
-    .attr("y", function(d){return rheight - 2*d.white})
+    .attr("y", function(d){return rheight - 2*d.white - 50})
     .text(function(d){return d.white});
 
     g.append("text") //labels the female percentages
     .attr("x",function(d, i) {return i * (rwidth / dataset.length) + barPadding/2 + 20;} )
-    .attr("y", function(d){return rheight - 2*d.black})
+    .attr("y", function(d){return rheight - 2*d.black - 50})
     .text(function(d){return d.black});
 
     g.append("text") //labels the female percentages
     .attr("x",function(d, i) {return i * (rwidth / dataset.length) + barPadding/2 + 40;} )
-    .attr("y", function(d){return rheight - 2*d.hispanic})
+    .attr("y", function(d){return rheight - 2*d.hispanic - 50})
     .text(function(d){return d.hispanic});
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 20)
+    .text("White")
+    .attr("fill", "blue");
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 35)
+    .text("Black")
+    .attr("fill", "red");    
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 50)
+    .text("Hispanic")
+    .attr("fill", "orange"); 
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
+    .attr("font-size", "12px");
 }
 Race()
 
@@ -175,31 +265,31 @@ function Age(){
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (awidth / dataset.length) + barPadding/2 ;})
-    .attr("y", function(d){return aheight - 2*d.young})
+    .attr("y", function(d){return aheight - 2*d.young - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.young})
     .style("fill", "blue");
 
     g.append("rect")
     .attr("x",function(d, i) {return i * (awidth / dataset.length) + barPadding/2 +15;})
-    .attr("y", function(d){return aheight - 2*d.middle})
+    .attr("y", function(d){return aheight - 2*d.middle - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.middle})
     .style("fill", "red");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (awidth / dataset.length) + barPadding/2 + 30;})
-    .attr("y", function(d){return aheight - 2*d.old})
+    .attr("y", function(d){return aheight - 2*d.old - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.old})
-    .style("fill", "yellow");
+    .style("fill", "orange");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (awidth / dataset.length) + barPadding/2 + 45;})
-    .attr("y", function(d){return aheight - 2*d.senior})
+    .attr("y", function(d){return aheight - 2*d.senior - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.senior})
-    .style("fill", "orange");
+    .style("fill", "purple");
 
     var g = aGroup.selectAll("text") 
     .data(dataset)
@@ -208,26 +298,81 @@ function Age(){
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (awidth / dataset.length) + barPadding/2 ;} )
-    .attr("y", function(d){return rheight - 2*d.young})
+    .attr("y", function(d){return rheight - 2*d.young - 50})
     .text(function(d){return d.young})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (awidth / dataset.length) + barPadding/2 + 15 ;} )
-    .attr("y", function(d){return rheight - 2*d.middle})
+    .attr("y", function(d){return rheight - 2*d.middle - 50})
     .text(function(d){return d.middle})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (awidth / dataset.length) + barPadding/2 + 30;} )
-    .attr("y", function(d){return rheight - 2*d.old})
+    .attr("y", function(d){return rheight - 2*d.old - 50})
     .text(function(d){return d.old})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (awidth / dataset.length) + barPadding/2 + 45;} )
-    .attr("y", function(d){return rheight - 2*d.senior})
+    .attr("y", function(d){return rheight - 2*d.senior - 50})
     .text(function(d){return d.senior})
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 20)
+    .text("Young")
+    .attr("fill", "blue");
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 35)
+    .text("Middle")
+    .attr("fill", "red");    
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 50)
+    .text("Old")
+    .attr("fill", "orange");
+
+    g.append("text")
+    .attr("x", 340)
+    .attr("y", 65)
+    .text("Senior")
+    .attr("fill", "purple");
+
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
     .attr("font-size", "12px");
 }
 Age()
@@ -241,24 +386,24 @@ function Education(){
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (ewidth / dataset.length) + barPadding/2;})
-    .attr("y", function(d){return eheight - 2*d.highschool})
+    .attr("y", function(d){return eheight - 2*d.highschool - 50})
     .attr("width", 20)
-    .attr("height", function(d){return 2*d.highschool})
+    .attr("height", function(d){return 2*d.highschool })
     .style("fill", "blue");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (ewidth / dataset.length) + barPadding/2 + 20;})
-    .attr("y", function(d){return eheight - 2*d.some})
+    .attr("y", function(d){return eheight - 2*d.some - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.some})
     .style("fill", "red");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (ewidth / dataset.length) + barPadding/2 + 40;})
-    .attr("y", function(d){return eheight - 2*d.college})
+    .attr("y", function(d){return eheight - 2*d.college - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.college})
-    .style("fill", "yellow");
+    .style("fill", "orange");
 
     var g = eGroup.selectAll("text") 
     .data(dataset)
@@ -267,18 +412,66 @@ function Education(){
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (ewidth / dataset.length) + barPadding/2;} )
-    .attr("y", function(d){return rheight - 2*d.highschool})
+    .attr("y", function(d){return rheight - 2*d.highschool - 50})
     .text(function(d){return d.highschool});
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (ewidth / dataset.length) + barPadding/2 + 20;} )
-    .attr("y", function(d){return rheight - 2*d.some})
+    .attr("y", function(d){return rheight - 2*d.some - 50})
     .text(function(d){return d.some});
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (ewidth / dataset.length) + barPadding/2 + 40;} )
-    .attr("y", function(d){return rheight - 2*d.college})
+    .attr("y", function(d){return rheight - 2*d.college - 50})
     .text(function(d){return d.college});
+
+    g.append("text")
+    .attr("x", 300)
+    .attr("y", 20)
+    .text("High School")
+    .attr("fill", "blue");
+
+    g.append("text")
+    .attr("x", 300)
+    .attr("y", 35)
+    .text("Some College")
+    .attr("fill", "red");    
+
+    g.append("text")
+    .attr("x", 300)
+    .attr("y", 50)
+    .text("College")
+    .attr("fill", "orange");
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
+    .attr("font-size", "12px");
 }
 Education()
 
@@ -291,31 +484,31 @@ function Income(){
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 ;})
-    .attr("y", function(d){return iheight -2*d.poor})
+    .attr("y", function(d){return iheight -2*d.poor - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.poor})
     .style("fill", "blue");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 +15;})
-    .attr("y", function(d){return iheight - 2*d.fine})
+    .attr("y", function(d){return iheight - 2*d.fine - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.fine})
     .style("fill", "red");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 +30;})
-    .attr("y", function(d){return iheight - 2*d.average})
+    .attr("y", function(d){return iheight - 2*d.average - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.average})
-    .style("fill", "yellow");
+    .style("fill", "orange");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 +45;})
-    .attr("y", function(d){return iheight - 2*d.rich})
+    .attr("y", function(d){return iheight - 2*d.rich - 50})
     .attr("width", 15)
     .attr("height", function(d){return 2*d.rich})
-    .style("fill", "orange");
+    .style("fill", "purple");
 
     var g = iGroup.selectAll("text") 
     .data(dataset)
@@ -324,26 +517,80 @@ function Income(){
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 ;} )
-    .attr("y", function(d){return iheight - 2*d.poor})
+    .attr("y", function(d){return iheight - 2*d.poor - 50})
     .text(function(d){return d.poor})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 + 15 ;} )
-    .attr("y", function(d){return iheight - 2*d.fine})
+    .attr("y", function(d){return iheight - 2*d.fine - 50})
     .text(function(d){return d.fine})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 + 30;} )
-    .attr("y", function(d){return iheight - 2*d.average})
+    .attr("y", function(d){return iheight - 2*d.average - 50})
     .text(function(d){return d.average})
     .attr("font-size", "12px");
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (iwidth / dataset.length) + barPadding/2 + 45;} )
-    .attr("y", function(d){return iheight - 2*d.rich})
+    .attr("y", function(d){return iheight - 2*d.rich -50})
     .text(function(d){return d.rich})
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", 330)
+    .attr("y", 20)
+    .text("Poor")
+    .attr("fill", "blue");
+
+    g.append("text")
+    .attr("x", 330)
+    .attr("y", 35)
+    .text("Fine")
+    .attr("fill", "red");    
+
+    g.append("text")
+    .attr("x", 330)
+    .attr("y", 50)
+    .text("Average")
+    .attr("fill", "orange");
+
+    g.append("text")
+    .attr("x", 330)
+    .attr("y", 65)
+    .text("Rich")
+    .attr("fill", "purple");
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
     .attr("font-size", "12px");
 }
 Income()
@@ -357,24 +604,24 @@ function Place(){
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (plwidth / dataset.length) + barPadding/2;})
-    .attr("y", function(d){return plheight - 2*d.urban})
+    .attr("y", function(d){return plheight - 2*d.urban - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.urban})
     .style("fill", "blue");
 
     g.append("rect")
     .attr("x",function(d, i) {return i * (plwidth / dataset.length) + barPadding/2 + 20;})
-    .attr("y", function(d){return plheight - 2*d.suburban})
+    .attr("y", function(d){return plheight - 2*d.suburban - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.suburban})
     .style("fill", "red");
 
     g.append("rect")
     .attr("x", function(d, i) {return i * (plwidth / dataset.length) + barPadding/2 + 40;})
-    .attr("y", function(d){return plheight - 2*d.rural})
+    .attr("y", function(d){return plheight - 2*d.rural - 50})
     .attr("width", 20)
     .attr("height", function(d){return 2*d.rural})
-    .style("fill", "yellow");
+    .style("fill", "orange");
 
     var g = plGroup.selectAll("text") 
     .data(dataset)
@@ -383,18 +630,66 @@ function Place(){
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (plwidth / dataset.length) + barPadding/2;} )
-    .attr("y", function(d){return plheight - 2*d.urban})
+    .attr("y", function(d){return plheight - 2*d.urban -50})
     .text(function(d){return d.highschool});
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (plwidth / dataset.length) + barPadding/2 + 20;} )
-    .attr("y", function(d){return plheight - 2*d.suburban})
+    .attr("y", function(d){return plheight - 2*d.suburban - 50})
     .text(function(d){return d.suburban});
 
     g.append("text") 
     .attr("x",function(d, i) {return i * (plwidth / dataset.length) + barPadding/2 + 40;} )
-    .attr("y", function(d){return plheight - 2*d.rural})
+    .attr("y", function(d){return plheight - 2*d.rural - 50})
     .text(function(d){return d.suburban});
+
+    g.append("text")
+    .attr("x", 320)
+    .attr("y", 20)
+    .text("Urban")
+    .attr("fill", "blue");
+
+    g.append("text")
+    .attr("x", 320)
+    .attr("y", 35)
+    .text("Suburban")
+    .attr("fill", "red");    
+
+    g.append("text")
+    .attr("x", 320)
+    .attr("y", 50)
+    .text("Rural")
+    .attr("fill", "orange");
+
+    g.append("text")
+    .attr("x", gwidth/40)
+    .attr("y", gheight - 20)
+    .text("Facebook")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/4.5)
+    .attr("y", gheight - 20)
+    .text("Pinterest")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/2.5)
+    .attr("y", gheight - 20)
+    .text("Instagram")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth/1.6)
+    .attr("y", gheight - 20)
+    .text("LinkedIn")
+    .attr("font-size", "12px");
+
+    g.append("text")
+    .attr("x", gwidth-70)
+    .attr("y", gheight - 20)
+    .text("Twitter")
+    .attr("font-size", "12px");
 }
 Place()
 
