@@ -21,7 +21,7 @@
     <h2>Education</h2>
     <svg id="Education" height="250" width="400" style="border: 1px solid grey;">
     </svg>
-    <h2>Income</h2>
+    <h2>Income per Year</h2>
     <svg id="Income" height="250" width="400" style="border: 1px solid grey;">
     </svg>
     <h2>Location</h2>
@@ -60,22 +60,22 @@ var plheight = Psvg.attr("height");
 var plwidth = Psvg.attr("width");
 var plGroup = Psvg.append("g");
 
-var dataset = [{"total": 72, "male": 66,"female": 77,"white": 70,"black": 67,"hispanic": 75,"young": 82,"middle": 79,"old": 64,
-            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73,"fine": 72,"average": 66, "rich": 78,"urban": 74,
-            "suburban": 72,"rural": 67},
-            {"total": 31,"male": 16, "female": 44,"white": 32,"black": 23,"hispanic": 32,"young": 82,"middle": 79,"old": 64,
-            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73, "fine": 72, "average": 66,"rich": 78,"urban": 74,
-            "suburban": 72,"rural": 67},
-            {"total": 72,"male": 66,"female": 77,"white": 70,"black": 67,"hispanic": 75,"young": 82,"middle": 79, "old": 64,
-            "senior": 48,"highschool": 71,"some": 72,"college": 72,"poor": 73,"fine": 72,"average": 66, "rich": 78,"urban": 74,
-            "suburban": 72, "rural": 67},
-            {"total": 25,"male": 26,"female": 25, "white": 26,"black": 22,"hispanic": 22, "young": 22,"middle": 32, "old": 36,
-            "senior": 12,"highschool": 9,"some": 25, "college": 46,"poor": 17,"fine": 21,"average": 32,"rich": 41,"urban": 30,
-            "suburban": 26,"rural": 12},
-            {"total": 23,"male": 25,"female": 21,"white": 20,"black": 28,"hispanic": 28, "young": 32,"middle": 29,"old": 13,
-            "senior": 6,"highschool": 19,"some": 23,"college": 27,"poor": 21,"fine": 19,"average": 25,"rich": 26,"urban": 30,
-            "suburban": 21,"rural": 15}]
-
+var dataset = [{
+      "total": 72,"male": 66,"female": 77,"white": 70,"black": 67,"hispanic": 75,"young": 82,"middle": 79,"old": 64,"senior": 48,
+      "highschool": 71,"some": 72,"college": 72,"poor": 73, "fine": 72,"average": 66,"rich": 78,"urban": 74,"suburban": 72,
+      "rural": 67},
+  {"total": 31,"male": 16,"female": 44,"white": 32,"black": 23,"hispanic": 32,"young": 37,"middle": 36,"old": 24,"senior": 16,
+     "highschool": 25,"some": 37,"college": 31,"poor": 24,"fine": 37,"average": 41,"rich": 30,"urban": 26,"suburban": 34,
+      "rural": 31,},
+  {"total": 28,"male": 24,"female": 31,"white": 21,"black": 47,"hispanic": 38,"young": 55,"middle": 28,"old": 11,"senior": 4,
+      "highschool": 25,"some": 32,"college": 26,"poor": 26,"fine": 27,"average": 30,"rich": 26,"urban": 32,"suburban": 28,
+      "rural": 12,},
+  {"total": 25,"male": 26,"female": 25,"white": 26,"black": 22,"hispanic": 22,"young": 22,"middle": 32,"old": 36,"senior": 12,
+      "highschool": 9,"some": 25,"college": 46,"poor": 17,"fine": 21,"average": 32,"rich": 41,"urban": 30,"suburban": 26,
+      "rural": 12},
+  {"total": 23,"male": 25,"female": 21,"white": 20,"black": 28,"hispanic": 28,"young": 32,"middle": 29,"old": 13,"senior": 6,
+      "highschool": 19,"some": 23,"college": 27,"poor": 21,"fine": 19,"average": 25,"rich": 26,"urban": 30,"suburban": 21,
+      "rural": 15}]
 function GenderBars(){
     barPadding = gwidth/20;
     var g = gGroup.selectAll("rect")
@@ -137,7 +137,7 @@ function GenderBars(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
@@ -206,19 +206,19 @@ function Race(){
     .text(function(d){return d.hispanic});
 
     g.append("text")
-    .attr("x", 340)
+    .attr("x", 320)
     .attr("y", 20)
     .text("White")
     .attr("fill", "blue");
 
     g.append("text")
-    .attr("x", 340)
+    .attr("x", 320)
     .attr("y", 35)
     .text("Black")
     .attr("fill", "red");    
 
     g.append("text")
-    .attr("x", 340)
+    .attr("x", 320)
     .attr("y", 50)
     .text("Hispanic")
     .attr("fill", "orange"); 
@@ -236,7 +236,7 @@ function Race(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
@@ -323,27 +323,26 @@ function Age(){
     g.append("text")
     .attr("x", 340)
     .attr("y", 20)
-    .text("Young")
+    .text("18-29 yrs.")
     .attr("fill", "blue");
 
     g.append("text")
     .attr("x", 340)
     .attr("y", 35)
-    .text("Middle")
+    .text("30-49 yrs.")
     .attr("fill", "red");    
 
     g.append("text")
     .attr("x", 340)
     .attr("y", 50)
-    .text("Old")
+    .text("50-64 yrs.")
     .attr("fill", "orange");
 
     g.append("text")
     .attr("x", 340)
     .attr("y", 65)
-    .text("Senior")
+    .text("65+ yrs.")
     .attr("fill", "purple");
-
 
     g.append("text")
     .attr("x", gwidth/40)
@@ -358,7 +357,7 @@ function Age(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
@@ -456,7 +455,7 @@ function Education(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
@@ -540,27 +539,27 @@ function Income(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", 330)
+    .attr("x", 280)
     .attr("y", 20)
-    .text("Poor")
+    .text("<$30,000")
     .attr("fill", "blue");
 
     g.append("text")
-    .attr("x", 330)
+    .attr("x", 280)
     .attr("y", 35)
-    .text("Fine")
+    .text("$30,000-49,999")
     .attr("fill", "red");    
 
     g.append("text")
-    .attr("x", 330)
+    .attr("x", 280)
     .attr("y", 50)
-    .text("Average")
+    .text("$50,000-74,999")
     .attr("fill", "orange");
 
     g.append("text")
-    .attr("x", 330)
+    .attr("x", 280)
     .attr("y", 65)
-    .text("Rich")
+    .text("$75,000+")
     .attr("fill", "purple");
 
     g.append("text")
@@ -576,7 +575,7 @@ function Income(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
@@ -674,7 +673,7 @@ function Place(){
     .attr("font-size", "12px");
 
     g.append("text")
-    .attr("x", gwidth/2.5)
+    .attr("x", gwidth/2.45)
     .attr("y", gheight - 20)
     .text("Instagram")
     .attr("font-size", "12px");
